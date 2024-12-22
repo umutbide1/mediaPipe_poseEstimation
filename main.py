@@ -25,6 +25,14 @@ for video_file in video_files:
     video_path = os.path.join(video_folder, video_file)
     cap = cv2.VideoCapture(video_path)
 
+    # Video özelliklerini al
+    fps = int(cap.get(cv2.CAP_PROP_FPS))
+    width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+    output_path = f"processed_{video_file}"
+    out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
+
     print(f"İşleniyor: {video_file}")
     while True:
         success, frame = cap.read()
@@ -44,7 +52,8 @@ for video_file in video_files:
                 landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style()
             )
 
-        # İşlenmiş kareyi göster
+        # İşlenmiş kareyi kaydet ve göster
+        out.write(frame)
         cv2.imshow(f"Processing {video_file}", frame)
 
         # ESC ile çıkış
@@ -53,6 +62,7 @@ for video_file in video_files:
             break
 
     cap.release()
+    out.release()
     cv2.destroyWindow(f"Processing {video_file}")
-
+    print(f"{output_path} kaydedildi.")
 
