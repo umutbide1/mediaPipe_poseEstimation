@@ -15,4 +15,3 @@ Kullanım Alanları:
 Fitness takibi ve duruş düzeltme.
 Oyunlar veya erişilebilirlik araçları için gerçek zamanlı jest tanıma.
 Spor ve rehabilitasyon alanında hareket analizi.
-Denemek için: Rehberi takip ederek depoyu klonlayın ve hemen kullanmaya başlayın!
