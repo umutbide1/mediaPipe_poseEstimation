@@ -20,3 +20,39 @@ pose = mp_pose.Pose(
     min_tracking_confidence=0.5
 )
 
+# Her video üzerinde döngü ile işlem yap
+for video_file in video_files:
+    video_path = os.path.join(video_folder, video_file)
+    cap = cv2.VideoCapture(video_path)
+
+    print(f"İşleniyor: {video_file}")
+    while True:
+        success, frame = cap.read()
+        if not success:
+            break
+
+        # İşlenecek video üzerinde poz tespiti
+        image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        results = pose.process(image)
+
+        # Eğer pose tespiti yapılmışsa çizim yap
+        if results.pose_landmarks:
+            mp_drawing.draw_landmarks(
+                frame,
+                results.pose_landmarks,
+                mp_pose.POSE_CONNECTIONS,
+                landmark_drawing_spec=mp_drawing_styles.get_default_pose_landmarks_style()
+            )
+
+        # İşlenmiş kareyi göster
+        cv2.imshow(f"Processing {video_file}", frame)
+
+        # ESC ile çıkış
+        if cv2.waitKey(1) & 0xFF == 27:
+            print(f"Videodan erken çıkıldı: {video_file}")
+            break
+
+    cap.release()
+    cv2.destroyWindow(f"Processing {video_file}")
+
+
