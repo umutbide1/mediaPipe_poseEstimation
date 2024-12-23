@@ -1,3 +1,4 @@
+# POSE ESTİMATİON
 Bu proje, Google MediaPipe kütüphanesini kullanarak gerçek zamanlı insan pozu kestirimi gerçekleştirmektedir. Proje, omuzlar, dirsekler, dizler gibi vücudun önemli eklem noktalarını tespit eder ve bu noktaları takip ederek uygulamalar için temel sağlar. Fitness takibi, jest tanıma ve interaktif uygulamalar gibi çeşitli alanlarda kullanılabilir.
 
 Öne Çıkan Özellikler:
